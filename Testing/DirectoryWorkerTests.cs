@@ -128,7 +128,7 @@ namespace Testing
 
             DirectoryWorker directoryWorker = new DirectoryWorker();
 
-            string content = directoryWorker.GetFileContent(filePath);
+            string content = directoryWorker.TryGetFileContent(filePath);
 
             Assert.Equal(expected, content.Length);
         }
@@ -141,7 +141,7 @@ namespace Testing
 
             DirectoryWorker directoryWorker = new DirectoryWorker();
 
-            string content = directoryWorker.GetFileContent(filePath);
+            string content = directoryWorker.TryGetFileContent(filePath);
 
             Assert.InRange<int>(content.Length, 0, expected);
         }
@@ -154,7 +154,7 @@ namespace Testing
 
             DirectoryWorker directoryWorker = new DirectoryWorker();
 
-            string content = directoryWorker.GetFileContent(filePath);
+            string content = directoryWorker.TryGetFileContent(filePath);
 
             Assert.Equal(expected, content);
         }

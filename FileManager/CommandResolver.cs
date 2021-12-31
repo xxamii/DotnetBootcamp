@@ -102,8 +102,8 @@ namespace FileManager
                 }
             }
 
-            List<FileInfo> files = _directoryWorker.GetCurrentFiles();
-            List<DirectoryInfo> directories = _directoryWorker.GetCurrentDirectories();
+            List<FileInfo> files = _directoryWorker.TryGetCurrentFiles();
+            List<DirectoryInfo> directories = _directoryWorker.TryGetCurrentDirectories();
 
             if (commandTokens.Contains("-nh"))
             {
@@ -155,7 +155,7 @@ namespace FileManager
 
             if (commandTokens.Length == 2)
             {
-                result = _directoryWorker.GetFileContent(commandTokens[1]);
+                result = _directoryWorker.TryGetFileContent(commandTokens[1]);
             }
             else
             {
@@ -171,7 +171,7 @@ namespace FileManager
 
             if (commandTokens.Length == 3)
             {
-                result = _directoryWorker.SearchFile(commandTokens[1], commandTokens[2]);
+                result = _directoryWorker.TrySearchFile(commandTokens[1], commandTokens[2]);
             }
             else
             {
@@ -187,7 +187,7 @@ namespace FileManager
 
             if (commandTokens.Length == 2)
             {
-                result = _directoryWorker.CreateDirectory(commandTokens[1]);
+                result = _directoryWorker.TryCreateDirectory(commandTokens[1]);
             }
             else
             {
@@ -203,7 +203,7 @@ namespace FileManager
 
             if (commandTokens.Length == 2)
             {
-                result = _directoryWorker.CreateFile(commandTokens[1]);
+                result = _directoryWorker.TryCreateFile(commandTokens[1]);
             }
             else
             {
@@ -219,7 +219,7 @@ namespace FileManager
 
             if (commandTokens.Length == 2)
             {
-                result = _directoryWorker.DeleteDirectory(commandTokens[1]);
+                result = _directoryWorker.TryDeleteDirectory(commandTokens[1]);
             }
             else
             {
@@ -235,7 +235,7 @@ namespace FileManager
 
             if (commandTokens.Length == 2)
             {
-                result = _directoryWorker.DeleteFile(commandTokens[1]);
+                result = _directoryWorker.TryDeleteFile(commandTokens[1]);
             }
             else
             {
@@ -251,7 +251,7 @@ namespace FileManager
 
             if (commandTokens.Length == 3)
             {
-                result = _directoryWorker.RenameDirectory(commandTokens[1], commandTokens[2]);
+                result = _directoryWorker.TryRenameDirectory(commandTokens[1], commandTokens[2]);
             }
             else
             {
@@ -267,7 +267,7 @@ namespace FileManager
 
             if (commandTokens.Length == 3)
             {
-                result = _directoryWorker.RenameFile(commandTokens[1], commandTokens[2]);
+                result = _directoryWorker.TryRenameFile(commandTokens[1], commandTokens[2]);
             }
             else
             {

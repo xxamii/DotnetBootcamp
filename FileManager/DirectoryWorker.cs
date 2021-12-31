@@ -15,14 +15,14 @@ namespace FileManager
             _directoryService = new DirectoryService();
         }
 
-        public List<FileInfo> GetCurrentFiles()
+        public List<FileInfo> TryGetCurrentFiles()
         {
-            return _directoryService.GetCurrentFiles();
+            return _directoryService.TryGetCurrentFiles();
         }
 
-        public List<DirectoryInfo> GetCurrentDirectories()
+        public List<DirectoryInfo> TryGetCurrentDirectories()
         {
-            return _directoryService.GetCurrentDirectories();
+            return _directoryService.TryGetCurrentDirectories();
         }
 
         public string ShowCurrentContentFullInfo(List<FileInfo> files, List<DirectoryInfo> directories)
@@ -95,11 +95,6 @@ namespace FileManager
             return files.Filter((a) => a.Attributes.HasFlag(FileAttributes.Hidden));
         }
 
-        public long GetDirectorySize(DirectoryInfo directory)
-        {
-            return _directoryService.GetDirectorySize(directory);
-        }
-
         public string TryChangeDirectory(string name)
         {
             return _directoryService.TryChangeDirectory(name);
@@ -127,9 +122,9 @@ namespace FileManager
             return result;
         }
 
-        public string GetFileContent(string filePath)
+        public string TryGetFileContent(string filePath)
         {
-            string text = _directoryService.GetFileContent(filePath);
+            string text = _directoryService.TryGetFileContent(filePath);
             string result = string.Empty;
 
             for (int i = 0; i < (text.Length > 200 ? 200 : text.Length); i++)
@@ -140,37 +135,37 @@ namespace FileManager
             return result;
         }
 
-        public string SearchFile(string filePath, string substring)
+        public string TrySearchFile(string filePath, string substring)
         {
-            return _directoryService.SearchFile(filePath, substring);
+            return _directoryService.TrySearchFile(filePath, substring);
         }
 
-        public string CreateFile(string name)
+        public string TryCreateFile(string name)
         {
             return _directoryService.CreateFile(name);
         }
 
-        public string CreateDirectory(string name)
+        public string TryCreateDirectory(string name)
         {
             return _directoryService.CreateDirectory(name);
         }
 
-        public string DeleteFile(string name)
+        public string TryDeleteFile(string name)
         {
             return _directoryService.DeleteFile(name);
         }
 
-        public string DeleteDirectory(string name)
+        public string TryDeleteDirectory(string name)
         {
             return _directoryService.DeleteDirectory(name);
         }
 
-        public string RenameFile(string name, string newName)
+        public string TryRenameFile(string name, string newName)
         {
             return _directoryService.RenameFile(name, newName);
         }
 
-        public string RenameDirectory(string name, string newName)
+        public string TryRenameDirectory(string name, string newName)
         {
             return _directoryService.RenameDirectory(name, newName);
         }

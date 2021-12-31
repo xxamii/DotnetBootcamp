@@ -72,7 +72,7 @@ namespace Testing
             DirectoryService directoryService = new DirectoryService();
             directoryService.TryChangeDirectory(testDirectory);
 
-            Assert.True(Directory.Exists(directoryService.GetCurrentDirectories()[0].FullName));
+            Assert.True(Directory.Exists(directoryService.TryGetCurrentDirectories()[0].FullName));
         }
 
         [Fact]
@@ -83,7 +83,7 @@ namespace Testing
             DirectoryService directoryService = new DirectoryService();
             directoryService.TryChangeDirectory(testDirectory);
 
-            Assert.True(File.Exists(directoryService.GetCurrentFiles()[0].FullName));
+            Assert.True(File.Exists(directoryService.TryGetCurrentFiles()[0].FullName));
         }
 
         [Fact]
@@ -96,7 +96,7 @@ namespace Testing
             DirectoryService directoryService = new DirectoryService();
             directoryService.TryChangeDirectory(testDirectory);
 
-            string content = directoryService.GetFileContent(testFilePath);
+            string content = directoryService.TryGetFileContent(testFilePath);
 
             Assert.Equal(expected, content);
         }
@@ -109,7 +109,7 @@ namespace Testing
 
             DirectoryService directoryService = new DirectoryService();
 
-            string content = directoryService.GetFileContent(testFilePath);
+            string content = directoryService.TryGetFileContent(testFilePath);
 
             Assert.Equal(expected, content);
         }
@@ -124,7 +124,7 @@ namespace Testing
             DirectoryService directoryService = new DirectoryService();
             directoryService.TryChangeDirectory(testDirectory);
 
-            string content = directoryService.GetFileContent(testFilePath);
+            string content = directoryService.TryGetFileContent(testFilePath);
 
             Assert.Equal(expected, content);
         }
@@ -137,7 +137,7 @@ namespace Testing
 
             DirectoryService directoryService = new DirectoryService();
 
-            string content = directoryService.GetFileContent(testFilePath);
+            string content = directoryService.TryGetFileContent(testFilePath);
 
             Assert.Equal(expected, content);
         }
@@ -151,7 +151,7 @@ namespace Testing
 
             DirectoryService directoryService = new DirectoryService();
 
-            string content = directoryService.SearchFile(testFilePath, testSubstring);
+            string content = directoryService.TrySearchFile(testFilePath, testSubstring);
 
             Assert.Equal(expected, content);
         }
@@ -165,7 +165,7 @@ namespace Testing
 
             DirectoryService directoryService = new DirectoryService();
 
-            string content = directoryService.SearchFile(testFilePath, testSubstring);
+            string content = directoryService.TrySearchFile(testFilePath, testSubstring);
 
             Assert.Equal(expected, content);
         }
@@ -179,7 +179,7 @@ namespace Testing
 
             DirectoryService directoryService = new DirectoryService();
 
-            string content = directoryService.SearchFile(testFilePath, testSubstring);
+            string content = directoryService.TrySearchFile(testFilePath, testSubstring);
 
             Assert.Equal(expected, content);
         }
