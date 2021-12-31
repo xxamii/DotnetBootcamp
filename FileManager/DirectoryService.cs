@@ -18,10 +18,10 @@ namespace FileManager
 
         public List<DirectoryInfo> GetCurrentDirectories()
         {
-            return GetDirectories(_currentDirectoryPath);
+            return TryGetDirectories(_currentDirectoryPath);
         }
 
-        private List<DirectoryInfo> GetDirectories(string path)
+        private List<DirectoryInfo> TryGetDirectories(string path)
         {
             try
             {
@@ -44,16 +44,20 @@ namespace FileManager
                 Console.WriteLine($"Couldn\'t fetch directories {path}: access denied");
 
             }
+            catch (Exception)
+            {
+                Console.WriteLine($"Couldn\'t fetch directories {path}");
+            }
 
             return new List<DirectoryInfo>();
         }
 
         public List<FileInfo> GetCurrentFiles()
         {
-            return GetFiles(_currentDirectoryPath);
+            return TryGetFiles(_currentDirectoryPath);
         }
 
-        public List<FileInfo> GetFiles(string path)
+        public List<FileInfo> TryGetFiles(string path)
         {
             try
             {
@@ -74,6 +78,10 @@ namespace FileManager
             catch (UnauthorizedAccessException)
             {
                 Console.WriteLine($"Couldn\'t fetch files from {path}: access denied");
+            }
+            catch (Exception)
+            {
+                Console.WriteLine($"Couldn\'t fetch files {path}");
             }
 
             return new List<FileInfo>();
@@ -113,13 +121,13 @@ namespace FileManager
         {
             long result = 0;
 
-            List<FileInfo> files = GetFiles(directory.FullName);
+            List<FileInfo> files = TryGetFiles(directory.FullName);
             foreach (FileInfo file in files)
             {
                 result += file.Length;
             }
 
-            List<DirectoryInfo> directories = GetDirectories(directory.FullName);
+            List<DirectoryInfo> directories = TryGetDirectories(directory.FullName);
 
             if (directories.Length > 0)
             {
@@ -132,49 +140,71 @@ namespace FileManager
             return result;
         }
 
-        public string GetFileContent(string filePath)
+        public string TryGetFileContent(string filePath)
         {
-            string result = string.Empty;
-            string path = Path.Combine(_currentDirectoryPath, filePath);
-
-            if (File.Exists(path))
+            try
             {
-                result = File.ReadAllText(path);
-            }
-            else
-            {
-                result = $"File {filePath} does not exist";
-            }
+                string result = string.Empty;
+                string path = Path.Combine(_currentDirectoryPath, filePath);
 
-            return result;
-        }
-
-        public string SearchFile(string filePath, string substring) // TODO: Move to DirectoryWorker
-        {
-            string result = string.Empty;
-            string path = Path.Combine(_currentDirectoryPath, filePath);
-
-            if (File.Exists(path))
-            {
-                string text = File.ReadAllText(path);
-                if (text.Contains(substring))
+                if (File.Exists(path))
                 {
-                    result = $"File {filePath} contains substring: {substring}";
+                    result = File.ReadAllText(path);
                 }
                 else
                 {
-                    result = $"File {filePath} does not contain substring: {substring}";
+                    result = $"File {filePath} does not exist";
                 }
-            }
-            else
-            {
-                result = $"File {filePath} does not exist";
-            }
 
-            return result;
+                return result;
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return $"Couldn\'t fetch file {filePath}: access denied";
+            }
+            catch (Exception)
+            {
+                return $"Couldn\'t fetch file {filePath}";
+            }
         }
 
-        public string CreateFile(string filePath)
+        public string TrySearchFile(string filePath, string substring) // TODO: Move to DirectoryWorker
+        {
+            try
+            {
+                string result = string.Empty;
+                string path = Path.Combine(_currentDirectoryPath, filePath);
+
+                if (File.Exists(path))
+                {
+                    string text = File.ReadAllText(path);
+                    if (text.Contains(substring))
+                    {
+                        result = $"File {filePath} contains substring: {substring}";
+                    }
+                    else
+                    {
+                        result = $"File {filePath} does not contain substring: {substring}";
+                    }
+                }
+                else
+                {
+                    result = $"File {filePath} does not exist";
+                }
+
+                return result;
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return $"Couldn\'t fetch file {filePath}: access denied";
+            }
+            catch (Exception)
+            {
+                return $"Couldn\'t fetch file {filePath}";
+            }
+        }
+
+        public string TryCreateFile(string filePath)
         {
             try
             {
@@ -212,7 +242,7 @@ namespace FileManager
             }
         }
 
-        public string CreateDirectory(string dirPath)
+        public string TryCreateDirectory(string dirPath)
         {
             try
             {
@@ -244,7 +274,7 @@ namespace FileManager
             }
         }
 
-        public string DeleteFile(string filePath)
+        public string TryDeleteFile(string filePath)
         {
             try
             {
@@ -276,7 +306,7 @@ namespace FileManager
             }
         }
 
-        public string DeleteDirectory(string dirPath)
+        public string TryDeleteDirectory(string dirPath)
         {
             try
             {
@@ -308,7 +338,7 @@ namespace FileManager
             }
         }
 
-        public string RenameFile(string oldFilePath, string newFilePath)
+        public string TryRenameFile(string oldFilePath, string newFilePath)
         {
             try
             {
@@ -341,7 +371,7 @@ namespace FileManager
             }
         }
 
-        public string RenameDirectory(string oldDirPath, string newDirPath)
+        public string TryRenameDirectory(string oldDirPath, string newDirPath)
         {
             try
             {
