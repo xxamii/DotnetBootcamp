@@ -142,32 +142,32 @@ namespace FileManager
 
         public string TryCreateFile(string name)
         {
-            return _directoryService.CreateFile(name);
+            return _directoryService.TryCreateFile(name);
         }
 
         public string TryCreateDirectory(string name)
         {
-            return _directoryService.CreateDirectory(name);
+            return _directoryService.TryCreateDirectory(name);
         }
 
         public string TryDeleteFile(string name)
         {
-            return _directoryService.DeleteFile(name);
+            return _directoryService.TryDeleteFile(name);
         }
 
         public string TryDeleteDirectory(string name)
         {
-            return _directoryService.DeleteDirectory(name);
+            return _directoryService.TryDeleteDirectory(name);
         }
 
         public string TryRenameFile(string name, string newName)
         {
-            return _directoryService.RenameFile(name, newName);
+            return _directoryService.TryRenameFile(name, newName);
         }
 
         public string TryRenameDirectory(string name, string newName)
         {
-            return _directoryService.RenameDirectory(name, newName);
+            return _directoryService.TryRenameDirectory(name, newName);
         }
     }
 }

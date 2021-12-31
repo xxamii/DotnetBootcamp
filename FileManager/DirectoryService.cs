@@ -204,7 +204,7 @@ namespace FileManager
             }
         }
 
-        public string CreateFile(string filePath)
+        public string TryCreateFile(string filePath)
         {
             try
             {
@@ -242,7 +242,7 @@ namespace FileManager
             }
         }
 
-        public string CreateDirectory(string dirPath)
+        public string TryCreateDirectory(string dirPath)
         {
             try
             {
@@ -274,7 +274,7 @@ namespace FileManager
             }
         }
 
-        public string DeleteFile(string filePath)
+        public string TryDeleteFile(string filePath)
         {
             try
             {
@@ -306,7 +306,7 @@ namespace FileManager
             }
         }
 
-        public string DeleteDirectory(string dirPath)
+        public string TryDeleteDirectory(string dirPath)
         {
             try
             {
@@ -338,7 +338,7 @@ namespace FileManager
             }
         }
 
-        public string RenameFile(string oldFilePath, string newFilePath)
+        public string TryRenameFile(string oldFilePath, string newFilePath)
         {
             try
             {
@@ -371,7 +371,7 @@ namespace FileManager
             }
         }
 
-        public string RenameDirectory(string oldDirPath, string newDirPath)
+        public string TryRenameDirectory(string oldDirPath, string newDirPath)
         {
             try
             {

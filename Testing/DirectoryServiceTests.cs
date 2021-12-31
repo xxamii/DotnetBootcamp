@@ -191,7 +191,7 @@ namespace Testing
 
             DirectoryService directoryService = new DirectoryService();
 
-            directoryService.CreateFile(testFilePath);
+            directoryService.TryCreateFile(testFilePath);
 
             Assert.True(File.Exists(testFilePath));
         }
@@ -204,7 +204,7 @@ namespace Testing
 
             DirectoryService directoryService = new DirectoryService();
 
-            string content = directoryService.CreateFile(testFilePath);
+            string content = directoryService.TryCreateFile(testFilePath);
 
             Assert.Equal(expected, content);
         }
@@ -216,7 +216,7 @@ namespace Testing
 
             DirectoryService directoryService = new DirectoryService();
 
-            directoryService.CreateFile(testFilePath);
+            directoryService.TryCreateFile(testFilePath);
 
             Assert.True(File.Exists(testFilePath));
         }
@@ -229,7 +229,7 @@ namespace Testing
 
             DirectoryService directoryService = new DirectoryService();
 
-            string content = directoryService.CreateFile(testFilePath);
+            string content = directoryService.TryCreateFile(testFilePath);
 
             Assert.Equal(expected, content);
         }
@@ -241,7 +241,7 @@ namespace Testing
 
             DirectoryService directoryService = new DirectoryService();
 
-            directoryService.CreateDirectory(testDirPath);
+            directoryService.TryCreateDirectory(testDirPath);
 
             Assert.True(Directory.Exists(testDirPath));
         }
@@ -254,7 +254,7 @@ namespace Testing
 
             DirectoryService directoryService = new DirectoryService();
 
-            string content = directoryService.CreateDirectory(testDirPath);
+            string content = directoryService.TryCreateDirectory(testDirPath);
 
             Assert.Equal(expected, content);
         }
@@ -267,7 +267,7 @@ namespace Testing
 
             DirectoryService directoryService = new DirectoryService();
 
-            string content = directoryService.CreateDirectory(testDirPath);
+            string content = directoryService.TryCreateDirectory(testDirPath);
 
             Assert.Equal(expected, content);
         }
@@ -279,7 +279,7 @@ namespace Testing
 
             DirectoryService directoryService = new DirectoryService();
 
-            directoryService.DeleteFile(testFilePath);
+            directoryService.TryDeleteFile(testFilePath);
 
             Assert.False(File.Exists(testFilePath));
         }
@@ -292,7 +292,7 @@ namespace Testing
 
             DirectoryService directoryService = new DirectoryService();
 
-            string content = directoryService.DeleteFile(testFilePath);
+            string content = directoryService.TryDeleteFile(testFilePath);
 
             Assert.Equal(expected, content);
         }
@@ -304,7 +304,7 @@ namespace Testing
 
             DirectoryService directoryService = new DirectoryService();
 
-            directoryService.DeleteDirectory(testDirPath);
+            directoryService.TryDeleteDirectory(testDirPath);
 
             Assert.False(Directory.Exists(testDirPath));
         }
@@ -317,7 +317,7 @@ namespace Testing
 
             DirectoryService directoryService = new DirectoryService();
 
-            string content = directoryService.DeleteDirectory(testDirPath);
+            string content = directoryService.TryDeleteDirectory(testDirPath);
 
             Assert.Equal(expected, content);
         }
@@ -330,7 +330,7 @@ namespace Testing
 
             DirectoryService directoryService = new DirectoryService();
 
-            directoryService.RenameFile(testFilePath, testNewFilePath);
+            directoryService.TryRenameFile(testFilePath, testNewFilePath);
 
             Assert.False(File.Exists(testFilePath));
             Assert.True(File.Exists(testNewFilePath));
@@ -345,7 +345,7 @@ namespace Testing
 
             DirectoryService directoryService = new DirectoryService();
 
-            string content = directoryService.RenameFile(testFilePath, testNewFilePath);
+            string content = directoryService.TryRenameFile(testFilePath, testNewFilePath);
 
             Assert.Equal(expected, content);
             Assert.False(File.Exists(testFilePath));
@@ -360,7 +360,7 @@ namespace Testing
 
             DirectoryService directoryService = new DirectoryService();
 
-            string content = directoryService.RenameFile(testFilePath, testNewFilePath);
+            string content = directoryService.TryRenameFile(testFilePath, testNewFilePath);
 
             Assert.Equal(expected, content);
             Assert.True(File.Exists(testNewFilePath));
@@ -374,7 +374,7 @@ namespace Testing
 
             DirectoryService directoryService = new DirectoryService();
 
-            directoryService.RenameDirectory(testDirPath, testNewFilePath);
+            directoryService.TryRenameDirectory(testDirPath, testNewFilePath);
 
             Assert.False(Directory.Exists(testDirPath));
             Assert.True(Directory.Exists(testNewFilePath));
@@ -389,7 +389,7 @@ namespace Testing
 
             DirectoryService directoryService = new DirectoryService();
 
-            string content = directoryService.RenameDirectory(testFilePath, testNewFilePath);
+            string content = directoryService.TryRenameDirectory(testFilePath, testNewFilePath);
 
             Assert.Equal(expected, content);
             Assert.False(Directory.Exists(testFilePath));
@@ -404,7 +404,7 @@ namespace Testing
 
             DirectoryService directoryService = new DirectoryService();
 
-            string content = directoryService.RenameDirectory(testFilePath, testNewFilePath);
+            string content = directoryService.TryRenameDirectory(testFilePath, testNewFilePath);
 
             Assert.Equal(expected, content);
             Assert.True(Directory.Exists(testNewFilePath));
