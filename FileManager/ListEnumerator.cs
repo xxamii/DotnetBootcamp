@@ -14,14 +14,7 @@ namespace Collections
         {
             get
             {
-                try
-                {
-                    return _array[_position];
-                }
-                catch (IndexOutOfRangeException)
-                {
-                    throw new InvalidOperationException();
-                }
+                return _array[_position];
             }
         }
 
@@ -32,8 +25,7 @@ namespace Collections
 
         public bool MoveNext()
         {
-            _position++;
-            return _position < _array.Length;
+            return ++_position < _array.Length;
         }
 
         public void Reset()

@@ -77,14 +77,18 @@ namespace FileManager
                 if (i > command.Length - 1 || (Char.IsWhiteSpace(command[i]) && !command[i-1].Equals('\\')))
                 {
                     if (current != string.Empty)
+                    {
                         result.Push(current);
+                    }
 
                     current = string.Empty;
                     continue;
                 }
 
                 if (!(command[i].Equals('\\') && i < command.Length - 1 && Char.IsWhiteSpace(command[i+1])))
+                {
                     current += command[i];
+                }
             }
 
             return result;
@@ -279,16 +283,20 @@ namespace FileManager
 
         private string ResolveHelpCommand()
         {
-            string result = "ls - list the current directory contents\n\t-s - sort by name, ascending\n\t-sd - sort by name, descending\n\t-nh - hide hidden files\n\t-f - show full information about a file or a directory\n" +
-                "cd [directory_name] - move into said directory\n" +
-                "file [file_name] - show contents of a file (<= 200 characters)\n" +
-                "sfile [file_name] [substring] - show whether a file contains a substring\n" +
-                "mkdir [directory_name] - create directory\n" +
-                "touch [file_name] - create file\n" +
-                "rmdir [directory_name] - delete directory\n" +
-                "rmfile [file_name] - delete file\n" +
-                "rndir [directory_name] [new_directory_name] - rename/move directory\n" +
-                "rnfile [file_name] [new_file_name] = rename/move file";
+            string result = String.Concat("ls - list the current directory contents\n",
+                "\t-s - sort by name, ascending\n",
+                "\t-sd - sort by name, descending\n",
+                "\t-nh - hide hidden files\n",
+                "\t-f - show full information about a file or a directory\n",
+                "cd [directory_name] - move into said directory\n",
+                "file [file_name] - show contents of a file (<= 200 characters)\n",
+                "sfile [file_name] [substring] - show whether a file contains a substring\n",
+                "mkdir [directory_name] - create directory\n",
+                "touch [file_name] - create file\n",
+                "rmdir [directory_name] - delete directory\n",
+                "rmfile [file_name] - delete file\n",
+                "rndir [directory_name] [new_directory_name] - rename/move directory\n",
+                "rnfile [file_name] [new_file_name] = rename/move file");
 
             return result;
         }
