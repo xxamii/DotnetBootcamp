@@ -9,7 +9,6 @@ namespace Core.Exceptions
         public AssertException(string message)
             : base(message)
         {
-            
         }
     }
 }

@@ -1,22 +1,22 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Collections.Generic;
 using BLL.Abstractions.Interfaces;
-using Core.Models;
 using Core.Attributes;
 using Core.Exceptions;
+using Core.Models;
 using DAL;
 
 namespace BLL.Services
 {
     public class TestRunner : ITestRunner
     {
-        private readonly AssemblyWorker _assembyWorker;
+        private readonly AssemblyWorker _assemblyWorker;
 
         public TestRunner(AssemblyWorker assemblyWorker)
         {
-            _assembyWorker = assemblyWorker;
+            _assemblyWorker = assemblyWorker;
         }
 
         public List<TestInfo> RunTests()
@@ -24,10 +24,10 @@ namespace BLL.Services
             List<TestInfo> testResults = new List<TestInfo>();
             List<Type> testClasses = GetAllTestClasses();
 
-            foreach(Type type in testClasses)
+            foreach (Type type in testClasses)
             {
-                List<TestInfo> currentTestReesults = RunTestMethodsOfClass(type);
-                testResults.AddRange(currentTestReesults);
+                List<TestInfo> currentTestResults = RunTestMethodsOfClass(type);
+                testResults.AddRange(currentTestResults);
             }
 
             return testResults;
@@ -37,7 +37,7 @@ namespace BLL.Services
         {
             List<Type> result = new List<Type>();
 
-            var assembly = _assembyWorker.GetTestingAssembly();
+            var assembly = _assemblyWorker.GetTestingAssembly();
 
             Type[] types = assembly.GetTypes();
 
@@ -83,7 +83,6 @@ namespace BLL.Services
         {
             TestInfo testResult = new TestInfo();
             testResult.TestName = method.Name;
-            
             try
             {
                 RunMethodOfClass(testClassInstance, method);

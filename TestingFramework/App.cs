@@ -6,7 +6,7 @@ using Core.Models;
 
 namespace PL
 {
-    class App
+    public class App
     {
         private readonly ITestRunner _testRunner;
 

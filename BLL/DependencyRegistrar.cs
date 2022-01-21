@@ -1,9 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using BLL.Abstractions.Interfaces;
+﻿using BLL.Abstractions.Interfaces;
 using BLL.Services;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BLL
 {

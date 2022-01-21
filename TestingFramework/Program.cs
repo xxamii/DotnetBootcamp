@@ -1,17 +1,14 @@
 ﻿using System;
 using System.IO;
-using BLL.Services;
 using Core;
-using Core.Models;
-using Core.Exceptions;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace PL
 {
-    class Program
+    public class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
             var services = new ServiceCollection();
             ConfigureServices(services);
