@@ -6,11 +6,19 @@ using BLL.Abstractions.Interfaces;
 using Core.Models;
 using Core.Attributes;
 using Core.Exceptions;
+using DAL;
 
 namespace BLL.Services
 {
     public class TestRunner : ITestRunner
     {
+        private readonly AssemblyWorker _assembyWorker;
+
+        public TestRunner(AssemblyWorker assemblyWorker)
+        {
+            _assembyWorker = assemblyWorker;
+        }
+
         public List<TestInfo> RunTests()
         {
             List<TestInfo> testResults = new List<TestInfo>();
@@ -29,14 +37,11 @@ namespace BLL.Services
         {
             List<Type> result = new List<Type>();
 
-            Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
+            var assembly = _assembyWorker.GetTestingAssembly();
 
-            foreach(Assembly assembly in assemblies)
-            {
-                Type[] types = assembly.GetTypes();
+            Type[] types = assembly.GetTypes();
 
-                result.AddRange(types.Where(type => type.IsClass && type.IsPublic && type.CustomAttributes.Any(x => x.AttributeType == typeof(TestClass))));
-            }
+            result.AddRange(types.Where(type => type.IsClass && type.IsPublic && type.CustomAttributes.Any(x => x.AttributeType == typeof(TestClass))));
 
             return result;
         }

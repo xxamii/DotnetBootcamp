@@ -11,7 +11,7 @@ namespace Core.Assertion
         {
             if (!statement)
             {
-                throw new AssertException($"{statement} is not true");
+                throw new AssertException($"statement is false");
             }
         }
 

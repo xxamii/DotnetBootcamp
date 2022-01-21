@@ -1,7 +1,11 @@
 ﻿using System;
+using System.IO;
 using BLL.Services;
+using Core;
 using Core.Models;
 using Core.Exceptions;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
 
 namespace PL
 {
@@ -9,30 +13,24 @@ namespace PL
     {
         static void Main(string[] args)
         {
-            var testRunner = new TestRunner();
-            var testResults = testRunner.RunTests();
+            var services = new ServiceCollection();
+            ConfigureServices(services);
+            var serviceProvider = services.BuildServiceProvider();
+            serviceProvider.GetService<App>().StartApp();
+        }
 
-            foreach (TestInfo testResult in testResults)
-            {
-                Console.WriteLine($"{testResult.IsSuccessful} - {testResult.TestName}: {testResult.Message}");
-            }
+        private static void ConfigureServices(IServiceCollection services)
+        {
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile(@"appsettings.json", optional: false)
+                .AddEnvironmentVariables()
+                .Build();
+            services.Configure<AppSettings>(configuration.GetSection("AppSettings"));
 
-            //Type type = typeof(ClassForTesting);
+            services.AddScoped<App>();
 
-            //var method = type.GetMethods()[1];
-
-            //var obj = Activator.CreateInstance(type);
-
-            //try
-            //{
-            //    method.Invoke(obj, null);
-            //}
-            //catch (AssertException exception)
-            //{
-            //    Console.WriteLine(exception.Message);
-            //}
-
-            Console.ReadLine();
+            BLL.DependencyRegistrar.ConfigureServices(services);
         }
     }
 }

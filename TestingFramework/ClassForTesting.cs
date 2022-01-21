@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Core.Attributes;
-using Core.Helpers;
+using Core.Assertion;
 using Core.Exceptions;
 
 namespace PL
@@ -61,7 +61,7 @@ namespace PL
         [RunAfterAllTests]
         public void IRunAfter()
         {
-            Console.WriteLine("I run afte");
+            Console.WriteLine("I run after");
         }
 
         [RunAfterAllTests]
